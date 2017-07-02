@@ -104,6 +104,7 @@ class Application {
 		//arguments.callee.minTickPeriod = 1;
 		var stateController = Service.Get("state");
 		var state = stateController.currentState;
+		if(!state) { return; }
 		
 		var ct = Date.now(); 
 		ct /= 1000.0; //convert to seconds

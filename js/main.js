@@ -16,7 +16,7 @@ var game_create = function()
 	var stateController = Service.Get("state");
 	stateController.addState("loading", LoadingState);
 	stateController.addState("menu", MenuState);
-	stateController.addState("battle", BattleState);
+	stateController.addState("map", MapState);
 	
 	var resources = [
 			"gfx/ui/btn_blue.sprite",
@@ -47,9 +47,10 @@ var game_create = function()
 			"gfx/avatars/avatars.spb",
 			"gfx/avatars/avatar.anim",
 			"gfx/levels/test.json",
-			"gfx/levels/terrain.png"
+			"gfx/levels/terrain.png",
+			"gfx/map.png"
 			];
-	stateController.gotoState("loading", [resources, "menu"]);
+	stateController.gotoState("loading", [resources, "map"]);
 	
 	/*
 	EventBus.ui.addListener("loadingComplete", function(e){

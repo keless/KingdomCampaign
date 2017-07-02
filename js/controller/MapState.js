@@ -1,16 +1,15 @@
 "use strict"; //ES6
 
-class BattleState extends AppState {
+class MapState extends AppState {
 	constructor() { 
 		super();
-		this.model = new BattleStateModel(this);
-		this.view = new BattleStateView(this.model);
+		this.model = new MapModel(this);
+		this.view = new MapView(this.model);
 		
-		this.playerController = null;
-		
-		this.initTest();
+		//this.initTest();
 	}
 	
+	/*
 	createTestEntity( name, pos ) {
 		var ent = new EntityModel( name );
 		ent.pos.setVec(pos);
@@ -25,10 +24,11 @@ class BattleState extends AppState {
 		this.createTestEntity("bob", new Vec2D(0, 50));
 		this.createTestEntity("sam", new Vec2D(450, 50));
 	}
+	*/
 }
 
 // conforms to ICastPhysics 
-class BattleStateModel extends BaseStateModel {
+class MapStateModel extends BaseStateModel {
 	constructor( state ) {
 		super();
 		
@@ -40,7 +40,6 @@ class BattleStateModel extends BaseStateModel {
 		this.castWorldModel = CastWorldModel.Get();
 		this.castWorldModel.setPhysicsInterface( this );
 		
-		Service.Add("battleStateModel", this);
 	}
 	
 	
@@ -49,15 +48,12 @@ class BattleStateModel extends BaseStateModel {
 			e.Destroy();
 		}
 		this.entities = [];
-		this.controllers = [];
 
 		super.Destroy();
 	}
 	
 	addEntity( ent ) {
 		this.entities.push(ent);
-		var controller = new AIController(ent);
-		this.controllers.push(controller);
 	}
 
 	
@@ -112,13 +108,13 @@ class BattleStateModel extends BaseStateModel {
 	}
 }
 
-class BattleStateView extends BaseStateView {
+class MapStateView extends BaseStateView {
 	constructor( model ) {
 		super();
 		
 		this.pModel = model;
 
-		this.rootView = new ButtonView("btnBack", "gfx/btn_blue.sprite", "Back");
+		this.rootView = new ButtonView("btnBack", "gfx/ui/btn_blue.sprite", "Back");
 		this.rootView.pos.setVal(150, 25);
 	}
 	

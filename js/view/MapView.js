@@ -11,10 +11,24 @@ class MapView extends BaseStateView {
 		
 		//add button to switch to hangar state
 		var RP = Service.Get("rp");
-		var sprBtnBlue = RP.getSprite("gfx/btn_blue.sprite");
+		var sprBtnBlue = RP.getSprite("gfx/ui/btn_blue.sprite");
 		this.btnHangar = new ButtonView("navHangar", sprBtnBlue, "Oh.. HELLO", "14px Arial", "#FFFF00");
 		this.btnHangar.pos.setVal(500, 50);
 
+		this.rootView.addCustomDraw((g, x,y, ct)=>{
+			//fill black
+			var w = g.getWidth();
+			var h = g.getHeight();
+			g.drawRectEx(w/2, h/2, w, h, "#000000");
+		});
+		this.rootView.setImageStretch("gfx/map.png");
+
+		var mapImg = new NodeView();
+		mapImg.setImageStretch("gfx/map.png");
+		mapImg.makeDraggable(); //xxx WIP drag bounds
+		this.rootView.addChild(mapImg);
+
+		this.rootView.addChild(this.btnHangar);
 	}
 	
 	
@@ -105,17 +119,5 @@ class MapView extends BaseStateView {
 				break;
 				//*/
 		}
-	}
-	
-	Draw( g, x,y, ct) {
-		//var model = this.model;
-		
-		//fill background
-		g.drawRectEx(this.screenSize.x/2, this.screenSize.y/2, this.screenSize.x, this.screenSize.y, "#000000");
-
-
-		
-		this.btnHangar.draw(g, 0,0, ct);
-		
 	}
 }

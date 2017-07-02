@@ -123,6 +123,9 @@ class NodeView extends BaseListener {
 			var RP = Service.Get("rp");
 			image = RP.getImage(image); //load image url into image resource
 		}
+
+		w = w || image.width;
+		h = h || image.height;
 		
 		if(this.image) {
 			console.error("NodeView: already has an image, abort!");
